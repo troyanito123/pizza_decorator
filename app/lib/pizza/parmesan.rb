@@ -40,19 +40,19 @@ module Pizza
     end
 
     def remove_small
-      super('', remove_cost - 3)
+      super('small', remove_cost - 3)
     end
 
     def remove_medium
-      super('', remove_cost - 7)
+      super('medium', remove_cost - 7)
     end
 
     def remove_large
-      super('', remove_cost - 12)
+      super('large', remove_cost - 12)
     end
 
     def remove_extra_large
-      super('', remove_cost - 15)
+      super('extra_large', remove_cost - 15)
     end
   end
 end

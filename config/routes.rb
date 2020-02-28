@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
   root 'pizzas#new'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post 'add_ingredient', to: 'pizzas#add_ingredient', as: 'add'
+  post 'remove_ingredient', to: 'pizzas#remove_ingredient', as: 'remove'
 end
