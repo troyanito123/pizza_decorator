@@ -12,6 +12,10 @@ module PizzasHelper
     session[:size] = size
   end
 
+  def current_size
+    @current_size = session[:size]
+  end
+
 
   def get_ingredient(type, pizza)
     p = Pizza::PizzaDefault.new pizza
@@ -25,8 +29,8 @@ module PizzasHelper
     end
   end
 
-  def pizza_add(pizza)
-    case session[:size]
+  def pizza_add(pizza, size)
+    case size
     when 'small'
       pizza.set_small
     when 'medium'
@@ -38,8 +42,8 @@ module PizzasHelper
     end
   end
 
-  def pizza_remove(pizza)
-    case session[:size]
+  def pizza_remove(pizza, size)
+    case size
     when 'small'
       pizza.remove_small
     when 'medium'
@@ -50,4 +54,30 @@ module PizzasHelper
       pizza.remove_extra_large
     end
   end
+
+  def change
+    pizza_new = Pizza::PizzaDefault.new
+    ingredients = current_pizza['ingredients']
+    p = nil
+    ingredients.each do |ingredient|
+      case ingredient
+      when 'parmesan'
+        p = Pizza::Parmesan.new pizza_new
+      when 'pineapple'
+        p = Pizza::Pineapple.new pizza_new
+      when 'mushroom'
+        p = Pizza::Mushroom.new pizza_new
+      end
+      p.set_ingredients
+
+      pizza_add(p, current_size)
+
+      p '#####'
+      p pizza_new.inspect
+      pizza_new = p
+
+    end
+    p
+  end
+
 end
